@@ -5,14 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux';
 
-//TODO: ha employee vagy company role akkor más talán a kiírása a Dashboard helyett
 
-const Navbar = () => {
+const Navbar = ({ page }) => {
     const user = useSelector(state => state.user.value);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogout = () => {
         dispatch(logout());
+        navigate('/');
+    }
+    const handleLanding = () => {
         navigate('/');
     }
     const handleLogin = () => {
@@ -49,9 +51,9 @@ const Navbar = () => {
                                     </button>
                                 </div>
                             }
-                            {user.role == 'employee' && user.loginCode != null &&
+                            {user.role == 'jobseeker' && user.loginCode != null &&
                                 <div className="ml-10 flex items-baseline space-x-3">
-                                    <button onClick={handleLogout} className=" text-xl font-bold hover:underline ">
+                                    <button onClick={handleLanding} className=" text-xl font-bold hover:underline ">
                                         Álláshírdetések
                                     </button>
                                     <button onClick={handleProfile} className=" text-xl font-bold hover:underline ">
@@ -64,14 +66,14 @@ const Navbar = () => {
                             }
                             {user.role == 'company' && user.loginCode != null &&
                                 <div className="ml-10 flex items-baseline space-x-4">
-                                    <button onClick={handleProfile} className=" text-xl font-bold hover:underline ">
-                                        Álláshírdetések
+                                    <button onClick={handleLanding} className=" text-xl font-bold hover:underline ">
+                                        Álláshirdetések
                                     </button>
                                     <button onClick={handleProfile} className=" text-xl font-bold hover:underline ">
                                         Profilom
                                     </button>
                                     <button onClick={handleAddCompany} className=" text-xl font-bold hover:underline ">
-                                        Álláshírdetés hozzáadása
+                                        Álláshirdetés hozzáadása
                                     </button>
                                     <button onClick={handleLogout} className=" text-xl font-bold hover:underline ">
                                         Kijelentkezés
@@ -82,7 +84,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-            <div className=' shadow-md text-4xl text-slate-950 font-bold p-8' >Dashboard</div>
+            <div className=' shadow-md text-4xl text-slate-950 font-bold p-8 h-28 align-middle' >{page}</div>
         </>
     )
 }

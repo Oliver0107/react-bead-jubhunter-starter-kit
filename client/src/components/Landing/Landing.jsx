@@ -29,7 +29,7 @@ const Landing = () => {
 
     return (
         < div>
-            <Navbar />
+            <Navbar page='Álláshirdetések' />
             <div className='  flex justify-center'>
                 <div className='w-[60vw] h-max p-4 mt-4'>
                     <h1 className=' text-3xl font-semibold'>Böngéssz az állások között:</h1>
