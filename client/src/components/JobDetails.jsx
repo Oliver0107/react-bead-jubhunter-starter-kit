@@ -11,6 +11,8 @@ const JobDetails = () => {
     const [job, setJob] = useState({});
     const user = useSelector(state => state.user.value);
 
+
+
     useEffect(() => {
         axios.get(`http://localhost:3030/jobs/${id}`)
             .then(res => {

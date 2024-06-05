@@ -14,7 +14,6 @@ const SignIn = () => {
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
-        e.preventDefault();
         axios.post('http://localhost:3030/authentication', { password, email, strategy: "local" })
             .then((res) => {
                 dispatch(login({

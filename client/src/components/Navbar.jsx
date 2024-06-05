@@ -29,7 +29,7 @@ const Navbar = ({ page, job }) => {
     }
 
     const handleAddCompany = () => {
-        navigate('/addCompany')
+        navigate('/createjob')
     }
 
     return (
