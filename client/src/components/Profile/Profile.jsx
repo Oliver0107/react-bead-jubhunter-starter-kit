@@ -31,7 +31,7 @@ const Profile = () => {
     return (
         <div className='h-screen'>
             <Navbar page='Profil' />
-            <div className=' bg-slate-100' style={{ height: 'calc(100vh - 11rem)' }}>
+            <div className=' bg-slate-100' style={{ minHeight: 'calc(100vh - 11rem)' }}>
                 {user.role == 'company' &&
                     <div className='flex justify-center'>
                         <div className='w-[90%]  mt-4'>

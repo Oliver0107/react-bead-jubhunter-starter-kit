@@ -10,10 +10,7 @@ import Job from './Job';
 import { Button, Input, Table } from '@chakra-ui/react'
 
 const Landing = () => {
-    const navigate = useNavigate();
-    const user = useSelector(state => state.user.value);
     const [jobs, setJobs] = useState([]);
-    console.log(user);
 
     useEffect(() => {
         axios.get('http://localhost:3030/jobs')
@@ -47,7 +44,7 @@ const Landing = () => {
                         </thead>
                         <tbody >
                             {jobs.map((job, index) => (
-                                <Job key={index} {...job} />
+                                <Job key={index} job={job} />
                             ))}
 
                         </tbody>

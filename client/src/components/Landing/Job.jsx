@@ -1,21 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Job = ({ position, city, type, salaryFrom, salaryTo, homeOffice }) => {
+const Job = ({ job }) => {
+    const navigate = useNavigate();
     const handleClick = () => {
-        console.log('clicked')
+        navigate(`/jobdetails/${job.id}`)
     }
     return (
         <tr className='border-t-2 cursor-pointer' onClick={handleClick}>
             <td className='w-1/2'>
-                <h1 className='font-bold'>{position}</h1>
-                <h3>{city}</h3>
+                <h1 className='font-bold'>{job.position}</h1>
+                <h3>{job.city}</h3>
             </td>
             <td className='w-1/4'>
-                {homeOffice == 1 && 'Home Office'}
+                {job.homeOffice == 1 && 'Home Office'}
             </td>
             <td className='w-1/4 text-right'>
-                <h1 className='font-bold'>{salaryFrom} - {salaryTo} Ft</h1>
-                <h3>{type}</h3>
+                <h1 className='font-bold'>{job.salaryFrom} - {job.salaryTo} Ft</h1>
+                <h3>{job.type}</h3>
             </td>
         </tr>
     );

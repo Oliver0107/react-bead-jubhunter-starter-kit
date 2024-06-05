@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../redux';
 
 
-const Navbar = ({ page }) => {
+const Navbar = ({ page, job }) => {
     const user = useSelector(state => state.user.value);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -84,7 +84,20 @@ const Navbar = ({ page }) => {
                     </div>
                 </div>
             </nav>
-            <div className=' shadow-md text-4xl text-slate-950 font-bold p-8 h-28 align-middle' >{page}</div>
+            {!job && <div className=' shadow-md text-4xl text-slate-950 font-bold p-8 h-28 align-middle' >{page}</div>}
+            {job &&
+                <div className='flex justify-between shadow-md text-4xl text-slate-950 font-bold p-8 h-28 align-middle' >
+
+                    <div className='w-1/2 '>{page}</div>
+                    <div className='w-1/2 '>
+                        <div className='flex flex-col '>
+                            <h1 className=' text-right text-2xl font-semibold'>{job.salaryFrom} - {job.salaryTo} Ft</h1>
+                            <h3 className='text-right text-xl font-medium'>{job.type == "full-time" ? "Teljes munkaidős" : (job.type == "part-time" ? "Részmunkaidős" : "Gyakornoki")}</h3>
+                        </div>
+                    </div>
+
+                </div >}
+
         </>
     )
 }
