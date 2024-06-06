@@ -61,7 +61,7 @@ const JobDetails = () => {
                                 </Tr>
                                 <Tr>
                                     <Td className='p-6  w-1/3 '>Foglalkoztatás típusa</Td>
-                                    <Td className='p-6  w-2/3 font-semibold'>{job.type}</Td>
+                                    <Td className='p-6  w-2/3 font-semibold'>{job.type == "full-time" ? "Teljes munkaidős" : (job.type == "part-time" ? "Részmunkaidős" : "Gyakornoki")}</Td>
                                 </Tr>
                                 <Tr>
                                     <Td className='p-6  w-1/3 '>Település</Td>

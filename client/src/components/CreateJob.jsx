@@ -4,8 +4,12 @@ import { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Input, Button, Select, Textarea, Checkbox } from '@chakra-ui/react'
+import { useSelector } from 'react-redux';
 const CreateJob = () => {
 
+
+    const user = useSelector(state => state.user.value);
+    const token = user.loginCode;
     const [company, setCompany] = useState('');
     const [position, setPosition] = useState('');
     const [description, setDescription] = useState('');
@@ -44,16 +48,23 @@ const CreateJob = () => {
 
     const handleCreateJob = () => {
         console.log(company, position, description, salaryFrom, salaryTo, type, city, homeOffice);
-        axios.post("http://localhost:3030/jobs/3", {
+        axios.post("http://localhost:3030/jobs/1", {
             company: company,
             position: position,
             description: description,
-            salaryFrom: salaryFrom,
-            salaryTo: salaryTo,
+            salaryFrom: parseInt(salaryFrom),
+            salaryTo: parseInt(salaryTo),
             type: type,
             city: city,
             homeOffice: homeOffice
-        })
+        },
+
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`  // Bearer token hozzáadása a kérés fejlécéhez
+                }
+            }
+        )
             .then((res) => {
                 console.log(res);
                 navigate("/");
