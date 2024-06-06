@@ -26,7 +26,9 @@ const Profile = () => {
         }
     }, [])
 
-
+    const handleAddCompany = () => {
+        navigate('/createjob');
+    }
 
     return (
         <div className='h-screen'>
@@ -39,8 +41,8 @@ const Profile = () => {
                             <div>
                                 <CompanyJobs />
                             </div>
-                            <div className="flex justify-center mt-14"> {/* Gomb középre helyezése */}
-                                <Button size='lg' colorScheme='blue'>Hirdetés hozzáadása</Button>
+                            <div className="flex justify-center mt-14">
+                                <Button onClick={handleAddCompany} size='lg' colorScheme='blue'>Hirdetés hozzáadása</Button>
                             </div>
                         </div>
 
