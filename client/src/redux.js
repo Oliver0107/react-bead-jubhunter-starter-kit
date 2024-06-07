@@ -7,7 +7,6 @@ const userSlice = createSlice({
             id: null,
             name: '',
             email: '',
-            experience: '',
             loginCode: null,
             role: '',
         }
@@ -27,8 +26,6 @@ const userSlice = createSlice({
             state.value.loginCode = null
             state.value.role = ''
             state.value.email = ''
-            state.value.experience = ''
-
         }
     }
 })

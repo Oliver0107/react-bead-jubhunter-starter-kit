@@ -10,8 +10,8 @@ const JobDetails = () => {
     const { id } = useParams();
     const [job, setJob] = useState({});
     const user = useSelector(state => state.user.value);
-
-
+    const [applicants, setApplicants] = useState([]);
+    const [isApplicantForThisJob, setIsApplicantForThisJob] = useState(false);
 
     useEffect(() => {
         axios.get(`http://localhost:3030/jobs/${id}`)
@@ -21,7 +21,55 @@ const JobDetails = () => {
             .catch(err => {
                 console.log(err);
             })
+        axios.get('http://localhost:3030/applicants?jobId=' + id, {
+            headers: {
+                'Authorization': `Bearer ${user.loginCode}`
+            }
+        })
+            .then(res => {
+                setApplicants(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        applicants.forEach(applicant => {
+            if (applicant.userId == user.id) {
+                setIsApplicantForThisJob(true);
+
+            }
+        })
     }, [])
+
+    const onApplyForJob = (jobId) => {
+        axios.post('http://localhost:3030/applicants', { jobId: jobId },
+            {
+                headers: {
+                    'Authorization': `Bearer ${user.loginCode}`
+                }
+            }
+        )
+            .then(() => {
+                setIsApplicantForThisJob(true);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    const onUnapplyForJob = (jobId) => {
+        axios.delete('http://localhost:3030/applicants?jobId=' + jobId, {
+            headers: {
+                'Authorization': `Bearer ${user.loginCode}`
+            }
+        })
+            .then(() => {
+                setIsApplicantForThisJob(false);
+                console.log('job has been removed');
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+    }
 
 
     return (
@@ -36,7 +84,8 @@ const JobDetails = () => {
                             <h3>Megtetszett a lehetőség? Jelentkezz!</h3>
                         </div>
                         <div className=' w-1/2 flex justify-end items-center'>
-                            {user.role == "jobseeker" && <Button size='md' colorScheme='blue'>Jelentkezés</Button>}
+                            {user.role == "jobseeker" && !isApplicantForThisJob && <Button size='md' colorScheme='blue' onClick={() => onApplyForJob(job.id)}>Jelentkezés</Button>}
+                            {user.role == "jobseeker" && isApplicantForThisJob && <Button size='md' colorScheme='red' onClick={() => onUnapplyForJob(job.id)}>Lejelentkezés</Button>}
                         </div>
                     </div>
                     <div>

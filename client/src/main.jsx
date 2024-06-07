@@ -11,6 +11,7 @@ import Profile from './components/Profile/Profile'
 import JobDetails from './components/JobDetails'
 import CreateJob from './components/CreateJob'
 import ModifyJob from './components/ModifyJob'
+import ApplicantDetails from './components/ApplicantDetails'
 import { Provider } from 'react-redux'
 import store from './redux'
 
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path='/jobdetails/:id' element={<JobDetails />} />
             <Route path="/createjob" element={<CreateJob />} />
             <Route path="/modifyjob/:id" element={<ModifyJob />} />
+            <Route path="/applicantdetails/:id" element={<ApplicantDetails />} />
 
           </Routes>
         </Provider>
