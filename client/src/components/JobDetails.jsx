@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar'
 
-import { Button, Table, Tbody, Tr, Td } from '@chakra-ui/react'
+import { Button, Table, Tbody, Tr, Td, useToast } from '@chakra-ui/react'
 
 const JobDetails = () => {
     const { id } = useParams();
@@ -12,6 +12,8 @@ const JobDetails = () => {
     const user = useSelector(state => state.user.value);
     const [applicants, setApplicants] = useState([]);
     const [isApplicantForThisJob, setIsApplicantForThisJob] = useState(false);
+
+    const toast = useToast();
 
     useEffect(() => {
         axios.get(`http://localhost:3030/jobs/${id}`)
@@ -50,6 +52,12 @@ const JobDetails = () => {
         )
             .then(() => {
                 setIsApplicantForThisJob(true);
+                return (toast({
+                    title: 'Jelentkezés sikeres!',
+                    status: 'success',
+                    duration: 9000,
+                    isClosable: true,
+                }))
             })
             .catch((err) => {
                 console.log(err);
@@ -63,7 +71,13 @@ const JobDetails = () => {
         })
             .then(() => {
                 setIsApplicantForThisJob(false);
-                console.log('job has been removed');
+                return (toast({
+                    title: 'Lejelentkezés sikeres!',
+
+                    status: 'success',
+                    duration: 9000,
+                    isClosable: true,
+                }))
             })
             .catch((err) => {
                 console.log(err);

@@ -4,9 +4,6 @@ import Navbar from './Navbar'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-
-
-
 import {
     Button,
     Table,

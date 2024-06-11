@@ -18,8 +18,6 @@ const Profile = () => {
 
     const user = useSelector(state => state.user.value);
     const navigate = useNavigate();
-    console.log(user);
-
 
     useEffect(() => {
         if (user.loginCode == null) {

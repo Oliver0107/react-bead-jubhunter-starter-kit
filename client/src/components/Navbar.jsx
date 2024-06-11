@@ -54,7 +54,7 @@ const Navbar = ({ page, job }) => {
                             {user.role == 'jobseeker' && user.loginCode != null &&
                                 <div className="ml-10 flex items-baseline space-x-3">
                                     <button onClick={handleLanding} className=" text-xl font-bold hover:underline ">
-                                        Álláshírdetések
+                                        Álláshirdetések
                                     </button>
                                     <button onClick={handleProfile} className=" text-xl font-bold hover:underline ">
                                         Profilom
